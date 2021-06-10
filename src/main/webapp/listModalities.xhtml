@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="conteudo">
+		<div class="container-fluid">
+			<!-- Page Heading -->
+			<div class="row">
+				<h1 class="h3 mb-4 text-gray-800">Listar Modalidades</h1>
+			</div>
+
+			<div class="row">
+				<div class="col-xl-12 col-md-12 mb-12">
+
+					<div class="card shadow mb-4">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary">Modalidades</h6>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+
+
+								<h:dataTable class="table table-borderless" width="100%"
+									cellspacing="0" id="items" value="#{modalityMb.listModalitys}"
+									var="item">
+									<h:column>
+										<f:facet name="header">
+											<h:outputText  style="color: #000" value="Codigo" />
+										</f:facet>
+										<h:outputText style="color: #000" value="#{item.id}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<h:outputText  style="color: #000" colspan="2" value="Descrição" />
+										</f:facet>
+										<h:outputText value="#{item.description}" />
+									</h:column>
+									<h:column styleClass="text-right">
+										<h:link styleClass="btn btn-info btn-icon-split"
+											outcome="addModalities" value=""
+											onclick="redirecionar();">
+											<f:param name="id" value="#{item.id}" />
+											<span class="icon text-white-50"> <i
+												class="fas fa-pen"></i>
+											</span>
+											<span class="text">Atualizar</span>
+										</h:link>
+										
+										<h:commandLink styleClass="btn btn-danger btn-icon-split"
+											onclick=" return confirm('Tem certeza da exclusão um ambiente #{item.description}');"
+											action="#{modalityMb.handleDelete(item.id)}" value="" style="margin-left: 1rem;">
+											<span class="icon text-white-50"> <i
+												class="fas fa-trash-alt"></i>
+											</span>
+											<span class="text">Deletar</span>
+										</h:commandLink>
+
+									</h:column>
+									
+								</h:dataTable>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>
+</html>
